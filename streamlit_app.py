@@ -18,7 +18,19 @@ st.caption("GitHub + Streamlit Cloud 部署版 | 非官方接口，可能被 Clo
 # ========== 侧边栏 ==========
 with st.sidebar:
     st.header("⚙️ 参数")
-    chain = st.selectbox("链", ["sol", "bsc", "base", "eth"], index=0)
+    chain = st.selectbox(
+    "链",
+    ["sol", "bsc", "base", "eth", "robinhood", "arc"],
+    index=0,
+    format_func=lambda x: {
+        "sol": "Solana",
+        "bsc": "BSC",
+        "base": "Base",
+        "eth": "Ethereum",
+        "robinhood": "Robinhood (Hood)",
+        "arc": "Arc",
+    }.get(x, x),
+)
     volume_threshold = st.number_input("最小平均成交量", min_value=0, value=1000, step=500)
     market_cap_threshold = st.number_input("最小中位市值", min_value=0, value=10000, step=5000)
     min_consistency = st.slider("最少出现时间框架数", 1, 5, 3)
